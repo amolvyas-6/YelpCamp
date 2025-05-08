@@ -8,8 +8,10 @@ export default function AddCampground() {
   const navigate = useNavigate();
   const { userId } = useAuth();
   const addCampground = async (campground) => {
-    campground["author"] = userId;
-    console.log(campground);
+    campground.append("author", userId);
+    for (let [key, value] of campground.entries()) {
+      console.log(`${key}: `, value);
+    }
     const postCampground = async () => {
       await axios.post("http://localhost:5000/campground", campground, {
         withCredentials: true,

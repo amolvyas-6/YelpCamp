@@ -5,8 +5,22 @@ import { campgroundSchema } from "../schemas.js";
 import CustomError from "../utils/CustomErrorClass.js";
 import checkAuth from "../utils/authentication.js";
 import * as campground from "../controllers/campground.js";
+import multer from "multer";
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./imgs");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    console.log(file.fieldname);
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const validateCampgroundRequest = (req, res, next) => {
   const { error } = campgroundSchema.validate(req.body);
@@ -24,7 +38,12 @@ router.post(
   "/",
   checkAuth,
   validateCampgroundRequest,
-  catchAsync(campground.createNew)
+  upload.single("imageSrc"),
+  // catchAsync(campground.createNew)
+  (req, res, next) => {
+    console.log(req.body, req.file);
+    res.send({ statusCode: 200, message: "Files Received" });
+  }
 );
 
 router.get("/:id", catchAsync(campground.displayById));

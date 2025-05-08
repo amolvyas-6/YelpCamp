@@ -9,6 +9,12 @@ export default function CampgroundForm({ campground, onSubmit, onCancel }) {
     defaultValues: campground,
   });
 
+  const handleFormSubmit = (data, event) => {
+    const form = event.target;
+    const formData = new FormData(form);
+    onSubmit(formData);
+  };
+
   const validations = {
     title: { required: "Title is required" },
     description: {
@@ -38,7 +44,7 @@ export default function CampgroundForm({ campground, onSubmit, onCancel }) {
   };
 
   return (
-    <form className="my-3" onSubmit={handleSubmit(onSubmit)}>
+    <form className="my-3" onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="mb-3">
         <label htmlFor="title" className="form-label">
           Title
@@ -74,9 +80,9 @@ export default function CampgroundForm({ campground, onSubmit, onCancel }) {
           Image URL
         </label>
         <input
-          type="text"
+          type="file"
           id="imgSrc"
-          {...register("imageSrc", validations.imageSrc)}
+          {...register("imageSrc")} //, validations.imageSrc)}
           placeholder="Enter Image URL"
           className="form-control"
         />
