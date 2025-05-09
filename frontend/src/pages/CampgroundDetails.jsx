@@ -6,6 +6,7 @@ import tryCatchWrapper from "../utils/tryCatchWrapper";
 import ReviewForm from "../components/ReviewForm";
 import ReviewList from "../components/ReviewList";
 import { useAuth } from "../AuthContext";
+import ImageCarousel from "../components/ImageCarousel";
 
 export default function CampgroundDetail() {
   const { id } = useParams();
@@ -93,7 +94,7 @@ export default function CampgroundDetail() {
       <div className="row my-3 px-3">
         <div className="col-6 m-auto">
           <div className="card">
-            <img src={campground.imageSrc} className="card-img-top" alt="..." />
+            <ImageCarousel images={campground.imageSrc} />
             <div className="card-body">
               <h5 className="card-title">{campground.title}</h5>
               <p className="card-text">{campground.description}</p>

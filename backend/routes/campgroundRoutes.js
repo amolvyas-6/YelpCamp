@@ -1,22 +1,37 @@
 import express from "express";
-import Campground from "../models/campgroundModel.js";
 import catchAsync from "../utils/catchAsync.js";
 import { campgroundSchema } from "../schemas.js";
 import CustomError from "../utils/CustomErrorClass.js";
 import checkAuth from "../utils/authentication.js";
 import * as campground from "../controllers/campground.js";
 import multer from "multer";
+import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const envPath = path.resolve(__dirname, "../../.env");
+dotenv.config({ path: envPath });
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./imgs");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    console.log(file.fieldname);
-    cb(null, file.fieldname + "-" + uniqueSuffix);
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "YelpCamp",
+    transformation: [
+      { width: 800, height: 600, crop: "fill" },
+      { quality: "auto" },
+    ],
   },
 });
 
@@ -38,12 +53,12 @@ router.post(
   "/",
   checkAuth,
   validateCampgroundRequest,
-  upload.single("imageSrc"),
-  // catchAsync(campground.createNew)
-  (req, res, next) => {
-    console.log(req.body, req.file);
-    res.send({ statusCode: 200, message: "Files Received" });
-  }
+  upload.array("imageSrc"),
+  catchAsync(campground.createNew)
+  // (req, res, next) => {
+  //   console.log(req.files);
+  //   res.send({ statusCode: 200, message: "Files Received" });
+  // }
 );
 
 router.get("/:id", catchAsync(campground.displayById));

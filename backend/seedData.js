@@ -19,9 +19,11 @@ const sampleData = [
     location: "India",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium itaque fugit, velit ipsum sunt corporis eos et culpa fuga atque cum veniam dicta suscipit repellendus quidem temporibus quisquam? Earum, ad",
-    imageSrc: `https://picsum.photos/400/200?random=${
-      Math.floor(Math.random() * 100) + 1
-    }`,
+    imageSrc: [
+      `https://picsum.photos/400/200?random=${
+        Math.floor(Math.random() * 100) + 1
+      }`,
+    ],
     price: 1200,
     reviews: [],
     author: "681671ab5236010156e31ee4",
@@ -31,9 +33,11 @@ const sampleData = [
     location: "India",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium itaque fugit, velit ipsum sunt corporis eos et culpa fuga atque cum veniam dicta suscipit repellendus quidem temporibus quisquam? Earum, ad",
-    imageSrc: `https://picsum.photos/400/200?random=${
-      Math.floor(Math.random() * 100) + 1
-    }`,
+    imageSrc: [
+      `https://picsum.photos/400/200?random=${
+        Math.floor(Math.random() * 100) + 1
+      }`,
+    ],
     price: 1500,
     reviews: [],
     author: "681671ab5236010156e31ee4",
@@ -43,9 +47,11 @@ const sampleData = [
     location: "Moon",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium itaque fugit, velit ipsum sunt corporis eos et culpa fuga atque cum veniam dicta suscipit repellendus quidem temporibus quisquam? Earum, ad",
-    imageSrc: `https://picsum.photos/400/200?random=${
-      Math.floor(Math.random() * 100) + 1
-    }`,
+    imageSrc: [
+      `https://picsum.photos/400/200?random=${
+        Math.floor(Math.random() * 100) + 1
+      }`,
+    ],
     price: 9010,
     reviews: [],
     author: "681671ab5236010156e31ee4",
@@ -53,9 +59,11 @@ const sampleData = [
   {
     title: "Vyas",
     location: "Bangalore",
-    imageSrc: `https://picsum.photos/400/200?random=${
-      Math.floor(Math.random() * 100) + 1
-    }`,
+    imageSrc: [
+      `https://picsum.photos/400/200?random=${
+        Math.floor(Math.random() * 100) + 1
+      }`,
+    ],
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium itaque fugit, velit ipsum sunt corporis eos et culpa fuga atque cum veniam dicta suscipit repellendus quidem temporibus quisquam? Earum, ad",
     price: 1908,

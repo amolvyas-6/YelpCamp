@@ -6,6 +6,8 @@ export const displayAll = async (req, res, next) => {
 };
 
 export const createNew = async (req, res, next) => {
+  const imageUrls = req.files.map((ele) => ele.path);
+  req.body.imageSrc = imageUrls;
   const campground = new Campground(req.body);
   await campground.save();
   res.status(201).send({ status: "Successful" });

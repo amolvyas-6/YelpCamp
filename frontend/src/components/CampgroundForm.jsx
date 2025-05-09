@@ -77,7 +77,7 @@ export default function CampgroundForm({ campground, onSubmit, onCancel }) {
 
       <div className="mb-3">
         <label htmlFor="imgSrc" className="form-label">
-          Image URL
+          Images
         </label>
         <input
           type="file"
@@ -85,6 +85,7 @@ export default function CampgroundForm({ campground, onSubmit, onCancel }) {
           {...register("imageSrc")} //, validations.imageSrc)}
           placeholder="Enter Image URL"
           className="form-control"
+          multiple
         />
         {errors.imageSrc && (
           <p className="text-danger">{errors.imageSrc.message}</p>

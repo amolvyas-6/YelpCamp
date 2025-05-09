@@ -6,7 +6,7 @@ export default function CampgroundCard({ campgroundData }) {
       <div className="row g-0">
         <div className="col-md-4">
           <img
-            src={campgroundData.imageSrc}
+            src={campgroundData.imageSrc[0]}
             className="img-fluid w-100 h-100 rounded-start object-fit-cover"
             alt="..."
           />
